@@ -4,14 +4,14 @@ const Form = require('./models');
 
 // POST endpoint to submit form data
 router.post('/submit', async (req, res) => {
-  const { teacherName, studentName, studentClass, phoneNumber } = req.body;
+  const { teacherName, studentName, studentClass, phoneNumber, baseName } = req.body;
 
   if (!teacherName || !studentName || !studentClass || !phoneNumber) {
     return res.status(400).json({ message: 'All fields are required' });
   }
 
   try {
-    const newForm = new Form({ teacherName, studentName, studentClass, phoneNumber });
+    const newForm = new Form({ teacherName, studentName, studentClass, phoneNumber, baseName });
     await newForm.save();
     res.status(201).json({ message: 'Form submitted successfully', data: newForm });
   } catch (error) {
